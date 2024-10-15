@@ -70,7 +70,7 @@ sm.set_array([])
 cbar = plt.colorbar(sm, ax=ax, ticks=np.linspace(0, 1, 5), label='Phase', shrink=0.8)  # 调整 shrink 参数
 cbar.ax.set_yticklabels(['$0$', '$\pi/2$', '$\pi$', '$3\pi/2$', '$2\pi$'])
 
-plt.title(r'Domain Coloring of $f(z) =(20)f^2-z,f_0=0 $')#frac{(Z^2-1)*(Z-2-i)^2}{Z^2+2+2i}
+plt.title(r'Domain Coloring of $f(z) =(20)f^2+z,f_0=0 $')#frac{(Z^2-1)*(Z-2-i)^2}{Z^2+2+2i}
 
 plt.grid(True, color='white', linestyle='--')  # 显示网格
 #plt.savefig('output.pdf', format='pdf',dpi=600)
