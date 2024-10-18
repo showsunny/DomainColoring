@@ -10,8 +10,9 @@ x_min=-2
 x_max=0.5
 y_min=-1.5
 y_max=1.5
-x = np.linspace(x_min, x_max, 4096)  # 根据图像尺寸修改样本数量
-y = np.linspace(y_min, y_max, 4096)
+faces=(4096,4096)
+x = np.linspace(x_min, x_max, faces[0])  # 根据图像尺寸修改样本数量
+y = np.linspace(y_min, y_max, faces[1])
 X, Y = np.meshgrid(x, y)
 Z = X + 1j * Y  # 复数平面,用于绘制普通函数
 Z=0   #初始化为自定义值用于绘制迭代函数
@@ -43,14 +44,13 @@ pulse_combined = np.logical_or(pulse1, pulse2)
 Hue = ((phase + np.pi) / (2 * np.pi) + 0.5) % 1  # 将相位旋转 180 度#[-pi, pi]->[0,2pi]
 # 根据需求以下两种模式任选一种
 #模式一：连续渐变，即亮度随|f(z)|的增大而增大，减小而减小。例如：当f(z)=z时原点处函数值最小原点附近呈现黑色无穷远处函数值最大呈现为白色
-Brightness = np.clip(0.6 + magnitude**2/(magnitude**2 + 1), 0, 1)- 0.2 * pulse_combined   # 亮度
-Saturation = np.clip(1.3-magnitude**2/(magnitude**2 + 1), 0, 1)     # 饱和度
+
 #模式二：跳跃渐变，在|f(z)|以2^n为周期时实现0~1的亮度渐变
-# Brightness = np.clip(0.6 + np.log2(magnitude+ 1e-8) - np.floor(np.log2(magnitude+ 1e-8)), 0, 1)-0.2*pulse_combined
-# Saturation = 1  # 饱和度
+Brightness = np.clip(0.6 + np.log2(magnitude+ 1e-8) - np.floor(np.log2(magnitude+ 1e-8)), 0, 1)-0.2*pulse_combined
+Saturation = 1  # 饱和度
 
 # 创建 HSV 颜色空间
-HSV = np.zeros((4096, 4096, 3))
+HSV = np.zeros((faces[0], faces[1], 3))
 HSV[..., 0] = Hue  # H
 HSV[..., 1] = Saturation  # S
 HSV[..., 2] = Brightness  # V
