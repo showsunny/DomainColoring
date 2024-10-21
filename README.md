@@ -6,6 +6,21 @@ This repository is used to draw high-quality pictures of complex variable functi
 ```bash
 python complexfunc.py --F 'Z**2-8/Z'
 ```
+在
+```bash
+from domaincoloring import plot_domain_coloring
+plot_domain_coloring(
+    F_expression='Z**2-8/Z',
+    phase_contour_increase=False,
+    phase_contour_decrease=False,
+    modulus_contour_increase=True,
+    modulus_contour_decrease=False,
+    checkboard=False,
+    continual_gradient=False,
+    coordinates=(-3, 3, -3, 3),
+    figsize=(8, 8)
+)
+```
 效果如下图
 
 ![figure1](https://github.com/showsunny/DomainColoring/blob/main/images/Figure_1.png)
