@@ -10,7 +10,7 @@ def periodic_rect_pulse(x, period=0.25, width=0.125):
 
 def plot_domain_coloring(F_expression, phase_contour_increase, phase_contour_decrease, 
                           modulus_contour_increase, modulus_contour_decrease, 
-                          checkboard, continual_gradient, coordinates, figsize):
+                          checkboard, continual_gradient, grid, coordinates, figsize):
     # 创建复数平面
     faces = (4096, 4096)
     x_min, x_max, y_min, y_max = coordinates
@@ -109,7 +109,8 @@ def plot_domain_coloring(F_expression, phase_contour_increase, phase_contour_dec
 
     #plt.title(r'Domain Coloring of $f(z) =\frac{(\frac{1}{z})^{18}-\frac{1}{z}}{\frac{1}{z}-1} $', fontsize=20)#frac{(Z^2-1)*(Z-2-i)^2}{Z^2+2+2i}
 
-    plt.grid(True, color='white', linestyle='--')  # 显示网格
+    if grid:
+        plt.grid(True, color='white', linestyle='--')  # 显示网格
     #plt.savefig("output.svg")
 
     plt.show()
@@ -124,11 +125,12 @@ if __name__ == "__main__":
     parser.add_argument("--checkboard", action="store_true", default=True, help="Add checkerboard pattern")
     parser.add_argument("--continual_gradient", action="store_true", default=False, help="Enable continual gradient mode")
     parser.add_argument("--coordinates", type=float, nargs=4, default=(-3, 3, -3, 3), help="Coordinates as x_min, x_max, y_min, y_max")
+    parser.add_argument("--grid", action="store_true", default=False, help="Enable grid on the plot")
     parser.add_argument("--figsize", type=float, nargs=2, default=(8, 8), help="Figure size as width height")
     args = parser.parse_args()
 
     plot_domain_coloring(args.F, args.phase_contour_increase, args.phase_contour_decrease, 
                           args.modulus_contour_increase, args.modulus_contour_decrease, 
-                          args.checkboard, args.continual_gradient, 
+                          args.checkboard, args.continual_gradient, args.grid,
                           tuple(args.coordinates), 
                           tuple(args.figsize))
