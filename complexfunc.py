@@ -124,8 +124,8 @@ if __name__ == "__main__":
     parser.add_argument("--modulus_contour_decrease", action="store_true", default=False, help="Enable modulus contour decreasing")
     parser.add_argument("--checkboard", action="store_true", default=True, help="Add checkerboard pattern")
     parser.add_argument("--continual_gradient", action="store_true", default=False, help="Enable continual gradient mode")
-    parser.add_argument("--coordinates", type=float, nargs=4, default=(-3, 3, -3, 3), help="Coordinates as x_min, x_max, y_min, y_max")
     parser.add_argument("--grid", action="store_true", default=False, help="Enable grid on the plot")
+    parser.add_argument("--coordinates", type=float, nargs=4, default=(-3, 3, -3, 3), help="Coordinates as x_min, x_max, y_min, y_max")
     parser.add_argument("--figsize", type=float, nargs=2, default=(8, 8), help="Figure size as width height")
     args = parser.parse_args()
 
