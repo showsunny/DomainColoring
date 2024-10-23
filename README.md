@@ -16,7 +16,7 @@ plot_domain_coloring(
     modulus_contour_increase=True,
     modulus_contour_decrease=False,
     checkboard=True,
-    grid=True
+    axes=True
     continual_gradient=False,
     coordinates=(-3, 3, -3, 3),
     figsize=(8, 8)
