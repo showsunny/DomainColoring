@@ -57,19 +57,19 @@ def plot_domain_coloring(F_expression, phase_contour_increase, phase_contour_dec
         ### 亮度方案
         if phase_contour_increase==True:
             if modulus_contour_increase == True:
-                Brightness = np.clip(Brightness_phase_contour + Brightness_modulus_contour - 1 + 0.6, 0, 1)
+                Brightness = np.clip(np.clip(Brightness_phase_contour + 0.6, 0, 1) + np.clip(Brightness_modulus_contour + 0.6, 0, 1) - 1, 0, 1)
             else:
                 if modulus_contour_decrease == True:
-                    Brightness = np.clip(Brightness_phase_contour - Brightness_modulus_contour + 0.6, 0, 1)
+                    Brightness = Brightness = np.clip(np.clip(Brightness_phase_contour + 0.6, 0, 1) + np.clip(1 - Brightness_modulus_contour + 0.6, 0, 1) - 1, 0, 1)
                 else:
                     Brightness = np.clip(0.6+Brightness_phase_contour, 0, 1)
         else:
             if phase_contour_decrease==True:
                 if modulus_contour_increase == True:
-                    Brightness = np.clip(Brightness_modulus_contour - Brightness_phase_contour + 0.6, 0, 1)
+                    Brightness = Brightness = np.clip(np.clip(1 - Brightness_phase_contour + 0.6, 0, 1) + np.clip(Brightness_modulus_contour + 0.6, 0, 1) - 1, 0, 1)
                 else:
                     if modulus_contour_decrease == True:
-                        Brightness = np.clip(1 - Brightness_phase_contour - Brightness_modulus_contour + 0.6, 0, 1)
+                        Brightness = Brightness = np.clip(np.clip(1 - Brightness_phase_contour + 0.6, 0, 1) + np.clip(1- Brightness_modulus_contour + 0.6, 0, 1) - 1, 0, 1)
                     else:
                         Brightness = np.clip(0.6+(1-Brightness_phase_contour), 0, 1)
             else:
