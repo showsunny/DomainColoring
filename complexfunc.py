@@ -104,7 +104,7 @@ def plot_domain_coloring(F_expression, phase_contour_increase, phase_contour_dec
     sm.set_array([])
 
     # 添加 colorbar 并指定颜色范围为色调
-    cbar = plt.colorbar(sm, ax=ax, ticks=np.linspace(0, 1, 5), shrink=0.8)  # 调整 shrink 参数
+    cbar = plt.colorbar(sm, ax=ax, ticks=np.linspace(0, 1, 5), shrink=0.9)  # 调整 shrink 参数
     cbar.ax.set_yticklabels(['$0$', '$\pi/2$', '$\pi$', '$3\pi/2$', '$2\pi$'])
 
     #plt.title(r'Domain Coloring of $f(z) =\frac{(\frac{1}{z})^{18}-\frac{1}{z}}{\frac{1}{z}-1} $', fontsize=20)#frac{(Z^2-1)*(Z-2-i)^2}{Z^2+2+2i}
