@@ -10,7 +10,7 @@ def periodic_rect_pulse(x, period=0.25, width=0.125):
 
 def plot_domain_coloring(F_expression, phase_contour_increase, phase_contour_decrease, 
                           modulus_contour_increase, modulus_contour_decrease, 
-                          checkboard, continual_gradient, grid, coordinates, figsize):
+                          checkboard, continual_gradient, axes, coordinates, figsize):
     # 创建复数平面
     faces = (4096, 4096)
     x_min, x_max, y_min, y_max = coordinates
@@ -57,19 +57,19 @@ def plot_domain_coloring(F_expression, phase_contour_increase, phase_contour_dec
         ### 亮度方案
         if phase_contour_increase==True:
             if modulus_contour_increase == True:
-                Brightness = np.clip(0.5*np.clip(0.6+Brightness_modulus_contour, 0, 1)+0.5*np.clip(0.6+Brightness_phase_contour, 0, 1),0,1)
+                Brightness = np.clip(Brightness_phase_contour + Brightness_modulus_contour - 1 + 0.6, 0, 1)
             else:
                 if modulus_contour_decrease == True:
-                    Brightness = np.clip(0.5*np.clip(1.6-Brightness_modulus_contour, 0, 1)+0.5*np.clip(0.6+Brightness_phase_contour, 0, 1),0,1)
+                    Brightness = np.clip(Brightness_phase_contour - Brightness_modulus_contour + 0.6, 0, 1)
                 else:
                     Brightness = np.clip(0.6+Brightness_phase_contour, 0, 1)
         else:
             if phase_contour_decrease==True:
                 if modulus_contour_increase == True:
-                    Brightness = np.clip(0.5*np.clip(0.6+Brightness_modulus_contour, 0, 1)+0.5*np.clip(1.6-Brightness_phase_contour, 0, 1),0,1)
+                    Brightness = np.clip(Brightness_modulus_contour - Brightness_phase_contour + 0.6, 0, 1)
                 else:
                     if modulus_contour_decrease == True:
-                        Brightness = np.clip(0.5*np.clip(1.6-Brightness_modulus_contour, 0, 1)+0.5*np.clip(1.6-Brightness_phase_contour, 0, 1),0,1)
+                        Brightness = np.clip(1 - Brightness_phase_contour - Brightness_modulus_contour + 0.6, 0, 1)
                     else:
                         Brightness = np.clip(0.6+(1-Brightness_phase_contour), 0, 1)
             else:
@@ -104,12 +104,12 @@ def plot_domain_coloring(F_expression, phase_contour_increase, phase_contour_dec
     sm.set_array([])
 
     # 添加 colorbar 并指定颜色范围为色调
-    cbar = plt.colorbar(sm, ax=ax, ticks=np.linspace(0, 1, 5), shrink=0.8)  # 调整 shrink 参数
+    cbar = plt.colorbar(sm, ax=ax, ticks=np.linspace(0, 1, 5), label='Phase', shrink=0.8)  # 调整 shrink 参数
     cbar.ax.set_yticklabels(['$0$', '$\pi/2$', '$\pi$', '$3\pi/2$', '$2\pi$'])
 
     #plt.title(r'Domain Coloring of $f(z) =\frac{(\frac{1}{z})^{18}-\frac{1}{z}}{\frac{1}{z}-1} $', fontsize=20)#frac{(Z^2-1)*(Z-2-i)^2}{Z^2+2+2i}
 
-    if grid:
+    if axes:
         plt.grid(True, color='white', linestyle='--')  # 显示网格
     #plt.savefig("output.svg")
 
@@ -124,13 +124,13 @@ if __name__ == "__main__":
     parser.add_argument("--modulus_contour_decrease", action="store_true", default=False, help="Enable modulus contour decreasing")
     parser.add_argument("--checkboard", action="store_true", default=True, help="Add checkerboard pattern")
     parser.add_argument("--continual_gradient", action="store_true", default=False, help="Enable continual gradient mode")
-    parser.add_argument("--grid", action="store_true", default=False, help="Enable grid on the plot")
+    parser.add_argument("--axes", action="store_true", default=False, help="Enable grid on the plot")
     parser.add_argument("--coordinates", type=float, nargs=4, default=(-3, 3, -3, 3), help="Coordinates as x_min, x_max, y_min, y_max")
     parser.add_argument("--figsize", type=float, nargs=2, default=(8, 8), help="Figure size as width height")
     args = parser.parse_args()
 
     plot_domain_coloring(args.F, args.phase_contour_increase, args.phase_contour_decrease, 
                           args.modulus_contour_increase, args.modulus_contour_decrease, 
-                          args.checkboard, args.continual_gradient, args.grid,
+                          args.checkboard, args.continual_gradient, args.axes,
                           tuple(args.coordinates), 
                           tuple(args.figsize))
