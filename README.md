@@ -6,7 +6,7 @@ This repository is used to draw high-quality pictures of complex variable functi
 ```bash
 python complexfunc.py --F 'Z**2-8/Z'
 ```
-在jupyternotbook环境中运行
+在jupyternotebook环境中运行
 ```bash
 from complexfunc import plot_domain_coloring
 plot_domain_coloring(
