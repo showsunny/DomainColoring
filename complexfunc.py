@@ -38,7 +38,7 @@ def plot_domain_coloring(F_expression, phase_contour_increase, phase_contour_dec
     Hue = ((phase + np.pi) / (2 * np.pi) + 0.5) % 1
 
     # 计算亮度
-    Brightness_contimual = np.exp(np.log(0.9) * (3 / magnitude) ** 2)
+    Brightness_contimual = np.where(magnitude == 0, 0, np.exp(np.log(0.9) * (3 / magnitude) ** 2))
     Brightness_modulus_contour = np.log2(magnitude+ 1e-8) - np.floor(np.log2(magnitude+ 1e-8))
     Brightness_phase_contour = np.log2(1 + phase * 6 / np.pi - np.floor(phase * 6 / np.pi))
 
