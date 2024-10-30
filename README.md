@@ -10,18 +10,18 @@ python complexfunc.py --F 'Z**2-8/Z'
 ```bash
 from complexfunc import plot_domain_coloring
 plot_domain_coloring(
-    F_expression='Z**2-8/Z',
+    F_expression='(Z**2-1)*(Z-2-1j)**2/(Z**2+2+2*1j)',
     phase_contour_increase=False,
     phase_contour_decrease=False,
     modulus_contour_increase=True,
     modulus_contour_decrease=False,
     checkboard=True,
-    axes=True,
+    axes=False,
     continual_gradient=False,
-    coordinates=(-3, 3, -3, 3),
-    figsize=(8, 8)
+    coordinates=(-2.5, 2.5, -2.5, 2.5),
+    figsize=(5.24, 3.74)
 )
 ```
 效果如下图
 
-![figure1](https://github.com/showsunny/DomainColoring/blob/main/images/Figure_1.png)
+![figure1](https://github.com/showsunny/DomainColoring/blob/main/images/Figure_2.png)
